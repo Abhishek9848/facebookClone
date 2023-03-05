@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
-
-import { Jwt } from 'jsonwebtoken'
+const secret = process.env.SECRET_KEY
 
 
 exports.generateToken =(payload , expired) =>{
-    return jwt.sign(payload , secret , expired)
+    return jwt.sign(payload , secret , {
+        expiresIn: expired
+    })
 }
