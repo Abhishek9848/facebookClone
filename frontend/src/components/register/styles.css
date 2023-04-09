@@ -16,3 +16,20 @@
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
 }
+
+.reg_grid .input_error {
+    width: 300px;
+    position: absolute;
+    top: 70px;
+}
+
+.input_error_select_large {
+    left: -82%;
+    top: 15px !important;
+}
+.error_message{
+    color:red
+}
+.success_message{
+    color:var(--green-color)
+}

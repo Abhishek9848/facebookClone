@@ -17,13 +17,10 @@ exports.register = async (req, res, next) => {
         if (check) {
             return res.status(400).send({ message: "Email already exist! try with another email id" })
         }
-        console.log("password", req.body.password)
         const hashedPassword = await hashSync(req.body.password, genSaltSync(12))
         const tempUserName = req.body.firstName + req.body.lastName
-        console.log("tempUserName---", tempUserName)
         let newUserName = await checkUserName(tempUserName)
         const user = new User({ ...req.body, userName: newUserName, password: hashedPassword })
-
         const savedUser = await user.save();
         const emailVerificationToken = generateToken({ id: savedUser._id.toString() }, "30m")
         const token = generateToken({ id: savedUser._id.toString() }, "7d")
@@ -31,9 +28,13 @@ exports.register = async (req, res, next) => {
         sendVerificationEmail(savedUser.email, savedUser.firstName, url)
         savedUser.password = undefined
         res.status(201).send({
-            success: true,
-            data: savedUser,
-            token,
+            id: user._id,
+            username: user.userName,
+            picture: user.picture,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            token: token,
+            verified: user.verified,
             message: message.userRegistration
         })
     } catch (err) {
@@ -64,17 +65,19 @@ exports.verifyEmail = async (req, res, next) => {
 exports.login = async (req, res, next) => {
     try {
         const { username } = req.body
-        const user = await User.findOne({ $or: [{ "userName": username }, { "email": username }] })
+        const user = await User.findOne({ $or: [{ "userName": username }, { "email": { $regex: username, $options: '$i' } }] })
         if (!user) return next(createError(404, "User not found!"))
         const isPasswordCorrect = await compare(req.body.password, user.password)
         if (!isPasswordCorrect) return next(createError(400, "Wrong password"))
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY)
-        savedUser.password = undefined
+        const token = generateToken({ id: user._id.toString() }, "7d")
         res.status(201).send({
-            success: true,
-            data: savedUser,
-            token,
-            message: message.userRegistration
+            id: user._id,
+            username: user.userName,
+            picture: user.picture,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            token: token,
+            verified: user.verified
         })
     } catch (err) {
         next(err)

@@ -1,3 +1,24 @@
+.CenterLoader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.768);
+    z-index: 999;
+}
+
+.app_logo {
+    font-size: 35px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    color: var(--blue-color)
+}
+
 /* ---------Login-----------  */
 .login_container {
     background: var(--bg-secondary);
@@ -84,6 +105,7 @@
     padding: 15px;
     padding-bottom: 1rem;
     width: 350px;
+
     height: fit-content;
     color: var(--color-primary);
 }
@@ -297,6 +319,7 @@
     .reg_grid label {
         width: 110px;
     }
+
     .register_input_wrap .input_error {
         max-width: 366px !important;
     }
@@ -306,6 +329,7 @@
     .login_footer_wrap {
         max-width: 630px;
     }
+
 }
 
 @media (min-width:850px) {
@@ -315,6 +339,10 @@
         max-width: 1000px;
         margin: 0 auto;
         padding: 0 1rem;
+    }
+
+    .app_logo {
+        font-size: 45px;
     }
 
     .login_1 {

@@ -16,4 +16,5 @@ exports.checkUserName = async (userName)=>{
             unique = false
         }
     }while(unique)
+    return userName
 }

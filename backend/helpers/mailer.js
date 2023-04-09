@@ -1,15 +1,11 @@
 const nodemailer = require('nodemailer')
-const {google} = require('googleapis')
-const auth_link = "https://developers.google.com/oauthplayground"
-const {OAuth2} = google.auth;
-const { EMAIL, MAILING_ID, MAILING_SECRET, MAILING_REFRESH } = process.env;
-const auth = new OAuth2(MAILING_ID, MAILING_SECRET, MAILING_REFRESH, auth_link)
 const fs = require("fs").promises;
 const path = require("path");
 const handlebars = require("handlebars");
 const relativeTemplatePath = "../email.html";
 
 exports.sendVerificationEmail = async (email, name, url) =>{
+    try{
     const templatePath = path.join(__dirname, relativeTemplatePath);
     const templateFile = await fs.readFile(templatePath, 'utf-8');
     const template = handlebars.compile(templateFile);
@@ -18,29 +14,29 @@ exports.sendVerificationEmail = async (email, name, url) =>{
         url
     };
     const finalHtml = template(replacements);
-    auth.setCredentials({
-        refresh_token:MAILING_REFRESH,
-    })
-    const accessToken = auth.getAccessToken();
     const smtp = nodemailer.createTransport({
-        service:"gmail",
-        auth:{
-            type:"OAUTH2",
-            user:EMAIL,
-            clientId:MAILING_ID,
-            clientSecret:MAILING_SECRET,
-            refreshToken:MAILING_REFRESH,
-            accessToken:accessToken
-        }
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        requireTLS: true,
+        auth: {
+            user: process.env.EMAIL_ID,
+            pass: process.env.EMAIL_PASSWORD,
+        },
     });
     const mailOptions = {
-        from:EMAIL,
-        to:"abhis4892@gmail.com",
+        from: process.env.EMAIL_ID,
+        to: email,
         subject:"Social media email verification",
         html:finalHtml,
     }
     smtp.sendMail(mailOptions , (err, res)=>{
         if(err) return err;
+        console.log("Email Response -->>", { success: true, status: 'Mail sent', response: res.response })
         return res;
     })
+}catch(err){
+        createError(400, err)
+    return
+}
 }

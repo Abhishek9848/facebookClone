@@ -18,12 +18,12 @@ export default function Login() {
             <div className='login_container'>
                 <div className='login_wrap'>
                     <div className='login_1'>
-                        <img src='../../icons/facebook.svg' alt='logo' />
+                        <p className = 'app_logo'>{process.env.REACT_APP_TITLE}</p>
                         <span>{appName} helps you connect and  share with the people in your life</span>
                     </div>
                     <LoginForm openRegister={handleOpen} /> 
                 </div>
-                <Register open={open} onClose = {handleOnClose}/>
+                {open && <Register  close = {handleOnClose}/>}
                <Footer />
             </div>
         </div>
