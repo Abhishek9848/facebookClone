@@ -6,17 +6,24 @@ import SearchMenu from './searchMenu'
 import { useRef, useState } from 'react'
 import AllMenu from './AllMenu'
 import useClickOutside from '../../helpers/clickOutside'
+import UserMenu from './userMenu'
 
 export default function Header() {
     const color = "#65676b"
     const allMenu = useRef(null)
+    const userMenu = useRef(null)
     useClickOutside(allMenu, () => {
         setShowAllMenu(false)
+    })
+    useClickOutside(userMenu, () => {
+        setShowUserMenu(false)
     })
     let { user } = useSelector(user => { return { ...user } })
     user = user ? user : JSON.parse(localStorage.getItem('user'))
     const [showSearch, setShowSearch] = useState(false)
     const [showAllManu, setShowAllMenu] = useState(false)
+    const [showUserMenu, setShowUserMenu] = useState(null)
+    console.log("showUserMenu ==>>" , showUserMenu)
     return (
         <header>
             <div className="header_left">
@@ -47,7 +54,7 @@ export default function Header() {
                     <span>{user?.firstName}</span>
                 </Link>
                 <div className='circle_icon hover1' ref={allMenu} onClick={() => setShowAllMenu((prev) => !prev)}>
-                    <Menu color={color} />
+                    <Menu color={`${showAllManu ? '#1b74e4' : color}`} />
                     {showAllManu && <AllMenu />}
                 </div>
                 <Link to="/" className='circle_icon hover1'><Messenger color={color} /></Link>
@@ -55,7 +62,17 @@ export default function Header() {
                     <Notifications color={color} />
                     <div className='right_notification'>5</div>
                 </Link>
-                <Link to="/" className='circle_icon hover1'><ArrowDown color={color} /></Link>
+                <div className="circle_icon hover1" ref={userMenu}>
+                    <div
+                        onClick={() => {
+                            setShowUserMenu((prev) => !prev);
+                        }}
+                    >
+                        <ArrowDown color={`${showUserMenu ? '#1b74e4' : color}`} />
+                    </div>
+
+                    {showUserMenu && <UserMenu user={user} />}
+                </div>
             </div>
         </header>
     )

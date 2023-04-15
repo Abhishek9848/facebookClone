@@ -1,13 +1,23 @@
+import { useEffect, useState } from 'react'
 import Header from '../../components/header'
 import './styles.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
-    const user = JSON.parse(localStorage.getItem('user'))
-    console.log("user-->", user.firstName)
+    const navigate = useNavigate()
+    const [user, setUser] = useState()
+    console.log("user -->>" , user)
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (!user) {
+            navigate('login')
+        }
+        setUser(user)
+    }, [])
     return (
         <div>
-        <Header />
-            Hii , {user.firstName}
+            <Header />
+            Hii , {user?.firstName}
         </div>
     )
 }
