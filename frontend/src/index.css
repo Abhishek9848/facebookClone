@@ -85,7 +85,7 @@ a {
 }
 
 .scrollbar::-webkit-scrollbar{
-  width: 15px;
+  width: 8px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb{

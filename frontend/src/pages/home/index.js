@@ -1,15 +1,22 @@
-import { useEffect, useState } from 'react'
 import Header from '../../components/header'
 import './styles.css'
-import { useNavigate } from 'react-router-dom'
 import LeftHome from '../../components/home/left'
 import { useSelector } from 'react-redux'
+import RightHome from '../../components/home/right'
+import Stories from '../../components/home/stories'
+import CreatePost from '../../components/createPost'
 export default function Home() {
-    const {user} = useSelector((user) => ({...user}))
-    return (
-        <div>
-            <Header />
-            <LeftHome user={user}/>
+    const { user } = useSelector((user) => ({ ...user }))
+    return (<>
+        <Header />
+        <div className='home'>
+            <LeftHome user={user} />
+            <div className='homeMiddle'>
+                <Stories />
+                <CreatePost />
+            </div>
+            <RightHome />
         </div>
+    </>
     )
 }

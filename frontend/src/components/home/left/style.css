@@ -2,11 +2,14 @@
     position: fixed;
     margin-top: 58px;
     left: 6px;
-    min-height: 100vh;
-    width: 300px;
+    max-height: 100vh;
+    width: 15vw;
     overflow-y: auto;
     color: var(--color-primary);
     padding: 15px 0;
+    padding-bottom: 4rem;
+    user-select: none;
+    z-index: 999;
 }
 
 .left_link {
@@ -60,4 +63,80 @@
     position: absolute;
     left: -10px;
     bottom: 2px;
+}
+
+.degree360 .small_circle {
+    transform: rotate(180deg);
+}
+
+.splitter {
+    width: 1.3px;
+    background: var(--divider);
+    margin: 9px 2px 0 12px;
+}
+
+.shortcut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heading {
+    font-size: 16px;
+    color: var(--color-secondary);
+    font-weight: 600;
+    padding: 13px 10px 11px 10px;
+}
+
+.edit_shortcut {
+    font-size: 14px;
+    color: var(--blue-color);
+    display: none;
+    cursor: pointer;
+}
+
+.shortcut:hover .edit_shortcut {
+    display: block;
+}
+
+.shortcut_item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.shortcut_item img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.shortcut_item span {
+    margin-bottom: 3px;
+}
+
+.socialMedia_copyright {
+    position: fixed;
+    bottom: 14px;
+    left: 10px;
+    font-size: 12px;
+    width: 15vw;
+    color: var(--color-secondary);
+}
+
+.socialMedia_copyright i , .relative_copyright i{
+    background-position: 0 -130px;
+}
+.relative_copyright{
+    font-size: 12px;
+    color: var(--color-secondary);
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 15vw;
 }

@@ -109,68 +109,32 @@ export const left = [
         text: "Weather",
         img: "weather",
     },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
-    {
-        text: "",
-        img: "",
-    },
 ];
+
+export const stories = [
+    {
+        profile_picture : "../../stories/profile1.jpg",
+        profile_name:"Elon Musk",
+        image:"../../stories/1.jpg"
+    },
+    {
+        profile_picture: "../../stories/profile2.jpg",
+        profile_name:"Abhishek Sharma",
+        image:"../../stories/2.png"
+    },
+    {
+        profile_picture : "../../stories/profile3.png",
+        profile_name:"Mukul Kumar",
+        image:"../../stories/3.jpg"
+    },
+    {
+        profile_picture : "../../stories/profile4.jfif",
+        profile_name:"Chandan",
+        image:"../../stories/4.jpg"
+    },
+    {
+        profile_picture : "../../stories/profile5.png",
+        profile_name:"Avinash Sharma",
+        image:"../../stories/5.jfif"
+    },
+]
