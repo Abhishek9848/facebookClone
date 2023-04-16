@@ -14,8 +14,8 @@ header {
 .header_left {
     display: flex;
     align-items: center;
-    gap: 10px;
     width: 500px;
+    gap: 10px;
     padding: 5px 1rem;
 }
 
@@ -172,7 +172,7 @@ header {
     position: absolute;
     align-items: flex-start;
     flex-direction: column;
-    left: 137px;
+    left: 95px;
     gap: 6px;
     background: var(--bg-primary);
     box-shadow: 0 12px 12px var(--shadow-1), inset 0 0 0 0 var(--shadow-inset);
@@ -512,3 +512,231 @@ header {
 }
 
 /* -------User Menu -------- */
+
+/* ===== Responsive ====== */
+@media (max-width:1447px) {
+    .middle_icon {
+        width: 90px;
+    }
+
+    .header_left {
+        width: 480px;
+    }
+}
+
+@media (max-width:1290px) {
+    .middle_icon {
+        width: 70px;
+    }
+
+    .search1 {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .search1 input {
+        display: none;
+    }
+
+    .header_left {
+        width: auto;
+    }
+}
+
+@media (max-width:987px) {
+    .middle_icon:nth-child(5) {
+        display: none;
+    }
+
+    .header_middle {
+        transform: translateX(-10%);
+    }
+}
+
+@media (max-width:876px) {
+    .middle_icon:nth-child(4) {
+        display: none;
+    }
+
+    .header_middle {
+        transform: translateX(-5%);
+    }
+}
+
+@media (max-width:800px) {
+    .middle_icon:nth-child(3) {
+        display: none;
+    }
+
+    .header_middle {
+        transform: translateX(0%);
+    }
+}
+
+@media (max-width:742px) {
+    .profile_link {
+        display: none;
+    }
+
+    .header_middle {
+        transform: translateX(20%);
+    }
+
+    .header_left {
+        width: 246px;
+    }
+}
+
+@media (max-width:720px) {
+    .profile_link {
+        display: none;
+    }
+
+    .header_middle {
+        transform: translateX(0%);
+    }
+}
+
+@media (max-width:636px) {
+    .profile_link {
+        display: none;
+    }
+
+    .header_middle {
+        transform: translateX(10%);
+    }
+
+    .header_left {
+        width: 246px;
+    }
+}
+
+@media (max-width:602px) {
+    .profile_link {
+        display: none;
+    }
+
+    .middle_icon:nth-child(1) {
+        display: none;
+    }
+
+    .all_menu {
+        width: 485px;
+    }
+
+    .all_left {
+        width: 250px;
+    }
+}
+
+@media (max-width:522px) {
+    .header_middle {
+        transform: translateX(-10%);
+    }
+}
+
+@media (max-width:496px) {
+    .header_middle {
+        transform: translateX(-40%);
+    }
+    .all_menu {
+        width: 340px;
+        right: -6rem;
+    }
+
+    .all_menu_wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .all_left {
+        width: 100%;
+    }
+
+    .all_right {
+        position: relative;
+        width: 100%;
+        left: 0;
+        right: 0;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .header_right .circle_icon:nth-child(3) {
+        display: none;
+    }
+}
+@media (max-width:422px) {
+    .header_middle {
+        transform: translateX(-70%);
+    }
+    .all_menu {
+        width: 340px;
+        right: -6rem;
+    }
+
+    .all_menu_wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .all_left {
+        width: 100%;
+    }
+
+    .all_right {
+        position: relative;
+        width: 100%;
+        left: 0;
+        right: 0;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .header_right .circle_icon:nth-child(3) {
+        display: none;
+    }
+}
+@media (max-width:420px) {
+    .header_logo .circle{
+        font-size: 14px;
+    }
+    .search1 , .circle_icon{
+        width: 30px;
+        height: 30px;
+    }
+    .search_area{
+        width: 260px !important;
+        left: 56px;
+    }
+    .search_area .search {
+        width: 200px;
+        height: 30px;
+    }
+        .header_middle {
+            transform: translateX(0%);
+        }
+    svg{
+        width: 16px !important;
+        height: 16px !important;
+    }
+    .middle_icon{
+        width: 40px;
+    }
+      .header_left{
+        width: 156px;
+      }
+        .mmenu , .absolute_wrap {
+            width: 280px;
+        }
+        .all_menu{
+            width: 290px;
+            right: -5rem;
+        }
+        .absolute_wrap_header{
+            font-size: 17px;
+        }
+}
+
+
+/* ===== Responsive ====== */

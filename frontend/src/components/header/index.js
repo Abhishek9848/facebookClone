@@ -23,7 +23,7 @@ export default function Header() {
     const [showSearch, setShowSearch] = useState(false)
     const [showAllManu, setShowAllMenu] = useState(false)
     const [showUserMenu, setShowUserMenu] = useState(null)
-    console.log("showUserMenu ==>>" , showUserMenu)
+    console.log("showUserMenu ==>>", showUserMenu)
     return (
         <header>
             <div className="header_left">
@@ -53,8 +53,10 @@ export default function Header() {
                     <img src={user?.picture} alt='profile_image' />
                     <span>{user?.firstName}</span>
                 </Link>
-                <div className='circle_icon hover1' ref={allMenu} onClick={() => setShowAllMenu((prev) => !prev)}>
-                    <Menu color={`${showAllManu ? '#1b74e4' : color}`} />
+                <div className='circle_icon hover1' ref={allMenu} >
+                    <div onClick={() => setShowAllMenu((prev) => !prev)}>
+                        <Menu color={`${showAllManu ? '#1b74e4' : color}`} />
+                    </div>
                     {showAllManu && <AllMenu />}
                 </div>
                 <Link to="/" className='circle_icon hover1'><Messenger color={color} /></Link>
@@ -63,14 +65,9 @@ export default function Header() {
                     <div className='right_notification'>5</div>
                 </Link>
                 <div className="circle_icon hover1" ref={userMenu}>
-                    <div
-                        onClick={() => {
-                            setShowUserMenu((prev) => !prev);
-                        }}
-                    >
+                    <div onClick={() => { setShowUserMenu((prev) => !prev) }} >
                         <ArrowDown color={`${showUserMenu ? '#1b74e4' : color}`} />
                     </div>
-
                     {showUserMenu && <UserMenu user={user} />}
                 </div>
             </div>

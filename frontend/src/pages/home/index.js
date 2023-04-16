@@ -2,22 +2,14 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/header'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
-
+import LeftHome from '../../components/home/left'
+import { useSelector } from 'react-redux'
 export default function Home() {
-    const navigate = useNavigate()
-    const [user, setUser] = useState()
-    console.log("user -->>" , user)
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'))
-        if (!user) {
-            navigate('login')
-        }
-        setUser(user)
-    }, [])
+    const {user} = useSelector((user) => ({...user}))
     return (
         <div>
             <Header />
-            Hii , {user?.firstName}
+            <LeftHome user={user}/>
         </div>
     )
 }

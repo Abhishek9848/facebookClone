@@ -1,6 +1,6 @@
 import { menu, create } from "../../data/allMenu";
 import AllMenuItem from "./AllMenuItem";
-export default function AllMenu({ setShowAllMenu }) {
+export default function AllMenu() {
   
   return (
     <div className="all_menu" >
@@ -91,8 +91,8 @@ export default function AllMenu({ setShowAllMenu }) {
         </div>
         <div className="all_right">
           <div className="all_right_header">Create</div>
-          {create.map((item) => (
-            <div className="all_right_item hover1">
+          {create.map((item , i) => (
+            <div className="all_right_item hover1" key={i}>
               <div className="all_right_circle">
                 <i className={item.icon}></i>
               </div>
