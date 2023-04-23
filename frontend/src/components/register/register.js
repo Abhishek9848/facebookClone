@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import DotLoader from "react-spinners/DotLoader";
+import Message from '../message'
 const initialValues = {
     firstName: '',
     lastName: '',
@@ -160,8 +161,8 @@ export default function Register({close}) {
                                         <button className='blue_btn open_signup' type='submit'>Sign Up</button>
                                     </div>
                                     <DotLoader color="#1876f2" loading={loading} size={30} />
-                                    {error && <div className="error_message">{error}</div>}
-                                    {success && <div className="success_message">{success}</div>}
+                                    {error && <Message type={'error'} msg={error} />}
+                                    {success && <Message type={'success'} msg={success} />}
                                 </Form>
                             )
                         }

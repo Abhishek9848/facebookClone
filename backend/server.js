@@ -8,6 +8,7 @@ const {readdirSync} = require('fs')
 
 app.use(express.json());
 app.use(cors())
+app.use(express.static(__dirname + '/public'));
 mongoose.set('strictQuery', true);
 // console.log("htmlDir --", path.join(__dirname, `/email.html`))
 readdirSync('./routes').map(r => app.use('/' , require("./routes/"+r)));

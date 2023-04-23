@@ -1,0 +1,12 @@
+.message {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: white;
+    border-radius: 5px;
+}
+.message span{
+    margin-left: 10px;
+}

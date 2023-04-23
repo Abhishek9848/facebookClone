@@ -1,6 +1,6 @@
 import '../../pages/login/styles.css'
 import { Formik, Form } from 'formik'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import LoginInput from '../../components/login/loginInput'
 import { useState } from 'react'
 import { loginValidation } from '../../validations'
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import DotLoader from 'react-spinners/DotLoader'
+import Message from '../message'
 
 export default function LoginForm({ openRegister }) {
     const navigate = useNavigate()
@@ -26,13 +27,11 @@ export default function LoginForm({ openRegister }) {
             const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, credentails);
             setLoading(false)
             setError("");
+            if (!data.verified) return navigate('/not-verified')
             dispatch({ type: "LOGIN", payload: data });
             Cookies.set("user", JSON.stringify(data));
             localStorage.setItem('user', JSON.stringify(data))
             navigate('/')
-            setTimeout(() => {
-               
-            }, 2000);
         } catch (error) {
             setLoading(false);
             setError(error.response.data.message);
@@ -68,8 +67,7 @@ export default function LoginForm({ openRegister }) {
                             {loading && <div className='CenterLoader'>
                                 <DotLoader color="#1876f2" loading={loading} size={300} />
                             </div>}
-                            {error && <div className="error_message">{error}</div>}
-
+                            {error && <Message type={'error'} msg={error} />}
                         </Form>
                     )}
                 </Formik>

@@ -3,9 +3,17 @@ import { Link } from 'react-router-dom'
 import SettingAndPrivacy from './SettingAndPrivacy'
 import HealthSupport from './healthSupport'
 import DisplayAccessibility from './DisplayAccessibility'
+import { useDispatch } from 'react-redux'
+import Cookies from 'js-cookie'
 
 export default function UserMenu({ user }) {
+    const dispatch = useDispatch()
     const [visible, setVisible] = useState(0)
+    const handleLogout = ()=>{
+        dispatch({type:"LOGOUT"})
+        Cookies.remove('user')
+        localStorage.removeItem('user')
+    }
     return (
         <div className='mmenu'>
             {visible === 0 &&
@@ -57,7 +65,7 @@ export default function UserMenu({ user }) {
                             <i className='right_icon'></i>
                         </div>
                     </div>
-                    <div className='mmenu_item hover3'>
+                    <div className='mmenu_item hover3' onClick={handleLogout}>
                         <div className='small_circle'>
                             <i className='logout_filled_icon'></i>
                         </div>

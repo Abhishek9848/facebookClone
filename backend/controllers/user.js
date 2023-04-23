@@ -42,6 +42,21 @@ exports.register = async (req, res, next) => {
     }
 }
 
+exports.resendVerificationMail = async (req, res, next) => {
+    try {
+        const { username } = req.body
+        const user = await User.findOne({ $or: [{ "userName": username }, { "email": { $regex: username, $options: 'i' } }] })
+        console.log("user --->>", user)
+        if (!user) return next(createError(404, "User not found!"))
+        const emailVerificationToken = generateToken({ id: user._id.toString() }, "30m")
+        const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`
+        await sendVerificationEmail(user.email, user.firstName, url)
+        res.status(200).json({ success: true, message: 'Mail sent , check your Inbox' })
+    } catch (err) {
+        next(err)
+    }
+}
+
 exports.verifyEmail = async (req, res, next) => {
     try {
         const { token } = req.body
@@ -54,7 +69,8 @@ exports.verifyEmail = async (req, res, next) => {
         }
         await User.findByIdAndUpdate(user.id, { verified: true });
         res.status(200).send({
-            message: message.verified
+            message: message.verified,
+            success: true,
         })
         console.log(token)
     } catch (err) {
@@ -82,4 +98,8 @@ exports.login = async (req, res, next) => {
     } catch (err) {
         next(err)
     }
+}
+
+exports.auth = async (req, res) => {
+    res.send({ message: "all ok" })
 }

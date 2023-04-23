@@ -4,5 +4,5 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 export default function LoggedOutRoutes() {
     const { user } = useSelector((state) => ({ ...state }))
-    return user ? <Navigate to="/" /> : <Outlet />
+    return user && user.verified ? <Navigate to="/" /> : <Outlet />
 }
