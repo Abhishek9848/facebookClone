@@ -3,7 +3,7 @@ import React from 'react'
 export default function PostError({ error , setError , setLoading}) {
     return (
         <div className='postError'>
-            {error}
+            <div className='posterror_error_text'>{error}</div>
             <button className='blue_btn' onClick={()=> {
                 setError('')
                 setLoading(false)

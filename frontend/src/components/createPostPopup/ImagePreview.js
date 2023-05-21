@@ -1,12 +1,24 @@
 import React, { useRef } from 'react'
 import EmojiPicker from './EmojiPicker'
 
-export default function ImagePreview({ user, text, setText, images, setImages, setShowPrev }) {
+export default function ImagePreview({ user, text, setText, images, setImages, setShowPrev, setError }) {
     const imageInputRef = useRef(null)
     const handleImages = (e) => {
         let file = Array.from(e.target.files)
         console.log("file -->", file)
         file.forEach((img) => {
+            if (img.type !== 'image/jpg' ||
+                img.type !== 'image/png' ||
+                img.type !== 'image/gif' ||
+                img.type !== 'image/webp'
+                || img.type !== 'image/jpeg'
+            ){
+                setError(`${img.name} format is unsupported`)
+                return ;
+            }else if(img.size > 1024 *1024 *5){
+                setError(`${img.name} size is too large , only 5mb is allowed`)
+                return;
+            }
             const reader = new FileReader()
             reader.readAsDataURL(img)
             reader.onload = (readEvent) => {

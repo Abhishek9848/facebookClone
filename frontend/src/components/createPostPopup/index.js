@@ -8,8 +8,8 @@ import useClickOutside from "../../helpers/clickOutside";
 import { createPost } from "../../functions/createPostRequest";
 import PulseLoader from "react-spinners/PulseLoader";
 import PostError from "./postError";
-import dataUriToBlob from "../../helpers/dataUriToBlob";
-import {uploadImage} from "../../functions/uploadImage";
+import {uplaodImages} from "../../functions/uploadImage";
+import dataURItoBlob from "../../helpers/dataUriToBlob";
 
 export default function CreatePostPopup({ setVisible }) {
   const { user } = useSelector((user) => ({ ...user }))
@@ -35,28 +35,22 @@ export default function CreatePostPopup({ setVisible }) {
         setVisible(false)
       }
     }else if(images && images.length){
-    setLoading(true)
-    const postImages = images.map((img)=>{
-      return dataUriToBlob(img)
-    })
-    const path = `${user.username}/post Images `
-    let formData = new FormData()
-    formData.append("path" , path)
-    postImages.forEach((data)=>{
-      formData.append('file', data)
-    })
-    console.log("post 0--->>" , postImages)
-    console.log("post 1--->>" , images)
-    const res = await uploadImage(formData, user.token)
-    console.log("resp")
-    console.log("response -->>" , res)
-    setLoading(false)
-    // if (res !== 'ok') { setError(res) }
-    // else {
-    //   setLoading(false)
-    //   reset()
-    //   setVisible(false)
-    // }
+      setLoading(true);
+      const postImages = images.map((img) => {
+        return dataURItoBlob(img);
+      });
+      const path = `${user.username}/post Images`;
+      let formData = new FormData();
+      formData.append("path", path);
+      postImages.forEach((image) => {
+        formData.append("file", image);
+      });
+      const response = await uplaodImages(formData, path, user.token);
+      await createPost(null, null, text, response, user.id, user.token);
+      setLoading(false);
+      setText("");
+      setImages("");
+      setVisible(false);
   }else if(text){
     setLoading(true)
     const res = await createPost(null, null, text, null, user.id, user.token)
@@ -118,6 +112,7 @@ export default function CreatePostPopup({ setVisible }) {
             images={images}
             setImages={setImages}
             setShowPrev={setShowPrev}
+            setError={setError}
           />
         }
         <AddToYourPost setShowPrev={setShowPrev} />
