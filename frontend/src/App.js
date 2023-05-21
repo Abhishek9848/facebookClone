@@ -8,11 +8,13 @@ import NotVerified from "./pages/notVerified";
 import ResendVerificationMail from "./pages/resend verification mail";
 import ActivateAccount from "./pages/activate account";
 import CreatePostPopup from "./components/createPostPopup";
+import { useState } from "react";
 
 function App() {
+  const [visible , setVisible] = useState(false)
   return (
     <div>
-      <CreatePostPopup />
+      {visible && <CreatePostPopup  setVisible={setVisible}/>}
       <Routes>
         <Route element={<LoggedOutRoutes />}>
           <Route path="/login" element={<Login />} exact />
@@ -21,7 +23,7 @@ function App() {
           <Route path="/activate/:token" element={<ActivateAccount />} exact />
         </Route>
         <Route element={<LoggedInRoutes />}>
-          <Route path="/" element={<Home />} exact />
+          <Route path="/" element={<Home setVisible={setVisible} />} exact />
           <Route path="/profile" element={<Profile />} exact />
         </Route>
       </Routes>

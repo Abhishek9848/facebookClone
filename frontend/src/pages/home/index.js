@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import RightHome from '../../components/home/right'
 import Stories from '../../components/home/stories'
 import CreatePost from '../../components/createPost'
-export default function Home() {
+export default function Home({setVisible}) {
     const { user } = useSelector((user) => ({ ...user }))
     return (<>
         <Header />
@@ -13,7 +13,7 @@ export default function Home() {
             <LeftHome user={user} />
             <div className='homeMiddle'>
                 <Stories />
-                <CreatePost />
+                <CreatePost setVisible={setVisible}/>
             </div>
             <RightHome />
         </div>

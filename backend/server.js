@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload')
 const cors = require('cors')
 const app = express();
 const {readdirSync} = require('fs')
@@ -8,6 +9,7 @@ const {readdirSync} = require('fs')
 
 app.use(express.json());
 app.use(cors())
+app.use(fileUpload({useTempFiles:true}))
 app.use(express.static(__dirname + '/public'));
 mongoose.set('strictQuery', true);
 // console.log("htmlDir --", path.join(__dirname, `/email.html`))
